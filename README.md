@@ -1,36 +1,78 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Scavenger Hunt — Frontend
+
+The web interface for the StarkNet-powered scavenger hunt game, built with **Next.js** and **Tailwind CSS**. Players can browse ecosystems (StarkNet, Stellar, Web3, Worldcoin), tackle challenges, track their progress, earn NFTs, and manage their profile — all from a single web experience.
+
+## Tech Stack
+
+- **Framework:** Next.js 14 (App Router)
+- **Styling:** Tailwind CSS + custom fonts (Orbitron, Space Grotesk, Geist)
+- **Wallet Integration:** MetaMask, Coinbase Wallet, Trust Wallet
+- **Language:** JavaScript / TypeScript
+
+## Features
+
+- **Homepage** — Hero, featured challenges, how it works, ecosystem spotlight, FAQ, testimonials
+- **Challenges** — Browse and filter challenges, view individual challenge details
+- **Dashboard** — Personal stats, ongoing challenges, NFT gallery, ecosystem overview, notifications, settings
+- **Auth** — Sign-up / sign-in with email or Google; wallet connect flow
+- **NFT Gallery** — View earned NFT rewards
+- **Ecosystems** — StarkNet, Stellar, Web3, Worldcoin support
+- **Multi-wallet Support** — MetaMask, Coinbase Wallet, Trust Wallet connections
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 18+
+- npm, yarn, pnpm, or bun
+
+### Installation
+
+```bash
+npm install
+```
+
+### Environment Setup
+
+```bash
+cp .env.example .env
+```
+
+### Running the App
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```
+app/
+├── (auth)/              # Sign-in & sign-up pages
+├── (root)/              # Public pages (home, challenges, about, contact)
+└── dashboard/           # Protected dashboard (challenges, NFTs, ecosystems, settings)
 
-## Learn More
+components/
+├── homepage/            # Landing page sections (Hero, FAQ, Features, etc.)
+├── challenges/          # Challenge cards, progress, steps
+├── dashboard/           # Sidebar, navbar, NFT showcase
+├── wallet/              # Wallet connection UI
+└── ui/                  # Reusable UI components
 
-To learn more about Next.js, take a look at the following resources:
+lib/                     # Utilities, mock data, types, wallet hooks
+public/
+├── images/              # App graphics and icons
+├── ecosystems/          # Ecosystem logos (StarkNet, Stellar, Web3, Worldcoin)
+└── nfts/                # NFT preview images
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Related Repositories
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- [scavenger-hunt-backend](https://github.com/LadderMine/scavenger-hunt-backend) — NestJS API server
+- [scavenger-hunt-contract](https://github.com/LadderMine/scavenger-hunt-contract) — Cairo smart contracts on StarkNet
 
-## Deploy on Vercel
+## License
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+MIT
