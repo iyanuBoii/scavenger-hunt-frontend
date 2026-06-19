@@ -1,6 +1,6 @@
 # Scavenger Hunt — Frontend
 
-The web interface for the StarkNet-powered scavenger hunt game, built with **Next.js** and **Tailwind CSS**. Players can browse ecosystems (StarkNet, Stellar, Web3, Worldcoin), tackle challenges, track their progress, earn NFTs, and manage their profile — all from a single web experience.
+The web interface for the scavenger hunt game, built with **Next.js** and **Tailwind CSS**. Players can browse ecosystems (StarkNet, Stellar, Web3, Worldcoin), tackle challenges, track their progress, earn NFTs, and manage their profile — all from a single web experience.
 
 ## Tech Stack
 
@@ -71,7 +71,7 @@ public/
 ## Related Repositories
 
 - [scavenger-hunt-backend](https://github.com/LadderMine/scavenger-hunt-backend) — NestJS API server
-- [scavenger-hunt-contract](https://github.com/LadderMine/scavenger-hunt-contract) — Cairo smart contracts on StarkNet
+- [scavenger-hunt-contract](https://github.com/LadderMine/scavenger-hunt-contract) — smart contracts
 
 ## License
 
