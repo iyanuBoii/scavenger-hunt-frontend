@@ -66,13 +66,13 @@ export function Navbar() {
         {/* Right side - actions */}
         <div className="ml-auto flex items-center gap-4">
           {/* Theme toggle */}
-          <button className="flex h-9 w-9 items-center justify-center rounded-full bg-muted text-primary-foreground hover:bg-muted/80 transition-colors">
+          <button aria-label="Toggle theme" className="flex h-9 w-9 items-center justify-center rounded-full bg-muted text-primary-foreground hover:bg-muted/80 transition-colors">
             <Sun className="h-5 w-5" />
           </button>
 
           {/* Notifications */}
           <div className="relative hidden md:block">
-            <button className="flex h-9 w-9 items-center justify-center rounded-full bg-muted text-primary-foreground hover:bg-muted/80 transition-colors">
+            <button aria-label="View notifications" className="flex h-9 w-9 items-center justify-center rounded-full bg-muted text-primary-foreground hover:bg-muted/80 transition-colors">
               <Bell className="h-5 w-5" />
             </button>
             <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-accent text-xs font-bold">
