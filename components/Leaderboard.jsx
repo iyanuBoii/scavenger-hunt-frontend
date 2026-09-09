@@ -22,6 +22,16 @@ const LeaderBoard = ({ slice, players }) => {
             </div>
           </div>
 
+          {(!players || players.length === 0) ? (
+            <div className="mt-6 flex flex-col items-center justify-center gap-2 py-12 text-center">
+              <span className="text-texts-important font-orbitron text-sm font-medium">
+                No players on the leaderboard yet
+              </span>
+              <span className="text-texts-placeholder text-xs">
+                Complete a challenge to be the first to appear here.
+              </span>
+            </div>
+          ) : (
           <div className="mt-6 space-y-4">
             {players.map((player, index) => (
               <div
@@ -87,6 +97,7 @@ const LeaderBoard = ({ slice, players }) => {
               </div>
             ))}
           </div>
+          )}
         </div>
       </div>
     </div>
