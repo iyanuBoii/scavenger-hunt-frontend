@@ -19,10 +19,10 @@ export default function ProfileCard({ user }) {
 	const isInChallenge = user.joinedChallenge && !user.earnedNFT;
 
 	return (
-		<div className="rounded-3xl border border-[#EC48994D] bg-[#0e0e20]/50 p-6 backdrop-blur-sm min-h-40">
+		<div className="rounded-3xl border border-[#EC48994D] bg-[#0e0e20]/50 p-4 sm:p-6 backdrop-blur-sm min-h-40 overflow-hidden">
 			<div className="flex flex-col md:flex-row items-start md:items-center gap-6">
-				<div className="flex items-center gap-6">
-					<div className="relative h-36 w-36 overflow-hidden rounded-2xl">
+				<div className="flex flex-col xs:flex-row sm:flex-row items-start sm:items-center gap-4 sm:gap-6 min-w-0">
+					<div className="relative h-24 w-24 sm:h-36 sm:w-36 shrink-0 overflow-hidden rounded-2xl">
 						<Image
 							src={"/images/profile.png"}
 							alt={"hey"}
@@ -31,9 +31,9 @@ export default function ProfileCard({ user }) {
 							className="object-contain rounded-2xl"
 						/>
 					</div>
-					<div className="space-y-5">
+					<div className="space-y-5 min-w-0">
 						<div className="text-xs font-orbitron bg-[#171C2B] text-[#FFFFFFCC] px-3 py-[3px] w-[100px]">{user.id}</div>
-						<h2 className="text-xl font-bold font-spaceGrotesk">{user.name}</h2>
+						<h2 className="text-xl font-bold font-spaceGrotesk break-words">{user.name}</h2>
 						<div className="flex items-center gap-2">
 							<Image
 								src={"/images/sergeant.svg"}
