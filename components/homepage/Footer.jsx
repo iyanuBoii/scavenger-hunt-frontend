@@ -3,18 +3,22 @@ import React from "react";
 
 const socials = [
   {
+    name: "Facebook",
     link: "",
     logo: "/assets/facebook.png",
   },
   {
+    name: "Twitter",
     link: "",
     logo: "/assets/twitter.png",
   },
   {
+    name: "Instagram",
     link: "",
     logo: "/assets/instagram.png",
   },
   {
+    name: "LinkedIn",
     link: "",
     logo: "/assets/linkedin.png",
   },
@@ -72,6 +76,7 @@ function Footer() {
             {socials.map((social, index) => (
               <a
                 href={social.link}
+                aria-label={social.name}
                 className="w-6 h-6 bg-gradient-to-tr from-[#7D3EAF] to-[#E7499F] rounded-full flex justify-center items-center relative group overflow-hidden transition-transform duration-300 hover:scale-110"
                 key={index}
               >
