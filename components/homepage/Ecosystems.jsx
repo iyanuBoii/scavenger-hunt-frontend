@@ -1,11 +1,20 @@
+import { useEffect, useState } from "react";
 import StarknetLogo from "@/public/ecosystems/Starknet_Symbol.png";
 import StellarLogo from "@/public/ecosystems/Stellar_Symbol.png";
 import Web3Logo from "@/public/ecosystems/Web3_Symbol.jpg";
 import WorldcoinLogo from "@/public/ecosystems/Worldcoin_Symbol.png";
 import EcosystemCard from "../ui/EcosystemCard";
+import EcosystemCardSkeleton from "../ui/EcosystemCardSkeleton";
 import { motion } from "framer-motion";
 
 export default function Ecosystems() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoading(false), 500);
+    return () => clearTimeout(timer);
+  }, []);
+
   const ecosystems = [
     {
       title: "Starknet",
@@ -128,19 +137,23 @@ export default function Ecosystems() {
         className="grid p-3 justify-center md:grid-cols-2 gap-5"
         variants={containerVariants}
       >
-        {ecosystems.map((ecosystem, index) => (
-          <motion.div
-            key={ecosystem.title}
-            variants={cardVariants}
-            whileHover={{
-              scale: 1.03,
-              transition: { type: "spring", stiffness: 400 },
-            }}
-            whileTap={{ scale: 0.98 }}
-          >
-            <EcosystemCard {...ecosystem} />
-          </motion.div>
-        ))}
+        {isLoading
+          ? ecosystems.map((ecosystem) => (
+              <EcosystemCardSkeleton key={ecosystem.title} />
+            ))
+          : ecosystems.map((ecosystem) => (
+              <motion.div
+                key={ecosystem.title}
+                variants={cardVariants}
+                whileHover={{
+                  scale: 1.03,
+                  transition: { type: "spring", stiffness: 400 },
+                }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <EcosystemCard {...ecosystem} />
+              </motion.div>
+            ))}
       </motion.section>
     </motion.main>
   );
