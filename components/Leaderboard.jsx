@@ -6,7 +6,7 @@ import Image from "next/image";
 
 const PAGE_SIZE = 5;
 
-const LeaderBoard = ({ slice, players }) => {
+const LeaderBoard = ({ slice, players, currentUserId }) => {
   const [page, setPage] = useState(1);
 
   const totalPages = players ? Math.max(1, Math.ceil(players.length / PAGE_SIZE)) : 1;
@@ -43,9 +43,16 @@ const LeaderBoard = ({ slice, players }) => {
             </div>
           ) : (
           <div className="mt-6 space-y-4">
-            {paginatedPlayers.map((player, index) => (
+            {paginatedPlayers.map((player, index) => {
+              const isCurrentUser =
+                currentUserId != null && String(player.id) === String(currentUserId);
+
+              return (
               <div
-                className="bg-[#0f111e] py-[14px] px-[22px] rounded-[10px]"
+                className={cn(
+                  "bg-[#0f111e] py-[14px] px-[22px] rounded-[10px]",
+                  isCurrentUser && "ring-2 ring-[#E7499F] bg-[#1a1030]"
+                )}
                 key={index}
               >
                 <div className="text-sm border-[1px] border-[#FFFFFF03] rounded-[10px] grid grid-cols-4 items-center">
@@ -54,6 +61,11 @@ const LeaderBoard = ({ slice, players }) => {
                     <span className="hidden text-[10px] text-texts-placeholder font-orbitron md:inline">
                       ( {player.rank} )
                     </span>
+                    {isCurrentUser && (
+                      <span className="text-[10px] font-orbitron text-[#E7499F] bg-[#E7499F1A] px-2 py-0.5 rounded-full">
+                        You
+                      </span>
+                    )}
                   </div>
 
                   <div className="flex items-center justify-start space-x-4">
@@ -105,7 +117,8 @@ const LeaderBoard = ({ slice, players }) => {
                   </div>
                 </div>
               </div>
-            ))}
+              );
+            })}
           </div>
           )}
 

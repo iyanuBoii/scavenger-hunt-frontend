@@ -6,6 +6,7 @@ import { WalletIcon } from "./WalletIcon";
 
 export const WalletAddressPopup = ({ address, onDisconnect, onClose, walletName }) => {
   const [copied, setCopied] = useState(false);
+  const [confirmingDisconnect, setConfirmingDisconnect] = useState(false);
 
   const copyAddress = () => {
     navigator.clipboard.writeText(address);
@@ -55,13 +56,33 @@ export const WalletAddressPopup = ({ address, onDisconnect, onClose, walletName 
               <p className="text-green-500 text-sm">Address copied!</p>
             )}
 
-            <button
-              onClick={onDisconnect}
-              className="flex items-center space-x-2 w-full p-3 bg-red-500/10 text-red-500 rounded-lg hover:bg-red-500/20 transition-colors"
-            >
-              <LogOut className="w-5 h-5" />
-              <span>Disconnect Wallet</span>
-            </button>
+            {confirmingDisconnect ? (
+              <div className="w-full space-y-2 p-3 bg-red-500/10 rounded-lg">
+                <p className="text-sm text-red-500">Disconnect this wallet?</p>
+                <div className="flex items-center gap-2">
+                  <button
+                    onClick={onDisconnect}
+                    className="flex-1 p-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition-colors text-sm"
+                  >
+                    Disconnect
+                  </button>
+                  <button
+                    onClick={() => setConfirmingDisconnect(false)}
+                    className="flex-1 p-2 bg-[#1A1A2F] text-gray-300 rounded-lg hover:text-white transition-colors text-sm"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <button
+                onClick={() => setConfirmingDisconnect(true)}
+                className="flex items-center space-x-2 w-full p-3 bg-red-500/10 text-red-500 rounded-lg hover:bg-red-500/20 transition-colors"
+              >
+                <LogOut className="w-5 h-5" />
+                <span>Disconnect Wallet</span>
+              </button>
+            )}
           </div>
         </div>
       </div>

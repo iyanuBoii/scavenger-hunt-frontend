@@ -60,11 +60,9 @@ export default function Dashboard() {
               </div>
             )}
             
-            {myEcosystems.length > 0 && (
-              <div>
-                <MyEcosystemsSection ecosystems={myEcosystems} />
-              </div>
-            )}
+            <div>
+              <MyEcosystemsSection ecosystems={myEcosystems} />
+            </div>
           </div>
         </div>
 
