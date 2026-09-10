@@ -5,6 +5,7 @@ import {
   GAME_INSTUCTIONS,
   LEADER_BOARD,
 } from "@/lib/mockdata";
+import { userProfile } from "@/lib/data";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -142,7 +143,11 @@ function Page({ params }) {
 
               {(challenge.status.toLowerCase() === "active" ||
                 challenge.status.toLowerCase() === "ended") && (
-                <LeaderBoard slice={5} players={LEADER_BOARD} />
+                <LeaderBoard
+                  slice={5}
+                  players={LEADER_BOARD}
+                  currentUserId={userProfile.id}
+                />
               )}
             </div>
 
