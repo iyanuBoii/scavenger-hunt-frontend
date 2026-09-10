@@ -1,9 +1,19 @@
+import { useState } from "react";
 import { cn } from "@/lib/utils";
 import SubheadingLeft from "./SubheadingLeft";
-import { ArrowDown, ArrowUp } from "lucide-react";
+import { ArrowDown, ArrowUp, ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 
+const PAGE_SIZE = 5;
+
 const LeaderBoard = ({ slice, players }) => {
+  const [page, setPage] = useState(1);
+
+  const totalPages = players ? Math.max(1, Math.ceil(players.length / PAGE_SIZE)) : 1;
+  const paginatedPlayers = players
+    ? players.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE)
+    : [];
+
   return (
     <div className="">
       <SubheadingLeft
@@ -33,7 +43,7 @@ const LeaderBoard = ({ slice, players }) => {
             </div>
           ) : (
           <div className="mt-6 space-y-4">
-            {players.map((player, index) => (
+            {paginatedPlayers.map((player, index) => (
               <div
                 className="bg-[#0f111e] py-[14px] px-[22px] rounded-[10px]"
                 key={index}
@@ -97,6 +107,32 @@ const LeaderBoard = ({ slice, players }) => {
               </div>
             ))}
           </div>
+          )}
+
+          {players && players.length > PAGE_SIZE && (
+            <div className="mt-6 flex items-center justify-center gap-4">
+              <button
+                type="button"
+                onClick={() => setPage((p) => Math.max(1, p - 1))}
+                disabled={page === 1}
+                className="flex items-center gap-1 text-sm text-texts-important disabled:opacity-30 disabled:cursor-not-allowed font-orbitron"
+              >
+                <ChevronLeft className="w-4 h-4" />
+                Prev
+              </button>
+              <span className="text-xs text-texts-placeholder font-orbitron">
+                Page {page} of {totalPages}
+              </span>
+              <button
+                type="button"
+                onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+                disabled={page === totalPages}
+                className="flex items-center gap-1 text-sm text-texts-important disabled:opacity-30 disabled:cursor-not-allowed font-orbitron"
+              >
+                Next
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            </div>
           )}
         </div>
       </div>
