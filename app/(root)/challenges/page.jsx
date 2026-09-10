@@ -54,24 +54,32 @@ function page() {
             <ChallengeEnds />
           </div>
 
-          {ecosystems.map((eco) => (
-            <TabsContent key={eco} value={eco} className="pb-8 mt-16 md:mt-32 ">
-              <div className="flex flex-wrap gap-4 lg:w-[1240px] justify-center gap-y-4 w-full md:mx-auto ">
-                {dummyChallenges
-                  .filter(
-                    (challenge) => eco === "All" || challenge.ecosystem === eco
-                  )
-                  .filter((challenge) =>
-                    challenge.title
-                      .toLowerCase()
-                      .includes(search.trim().toLowerCase())
-                  )
-                  .map((challenge, index) => (
-                    <ChallengeMainCard key={index} {...challenge} />
-                  ))}
-              </div>
-            </TabsContent>
-          ))}
+          {ecosystems.map((eco) => {
+            const filteredChallenges = dummyChallenges
+              .filter((challenge) => eco === "All" || challenge.ecosystem === eco)
+              .filter((challenge) =>
+                challenge.title.toLowerCase().includes(search.trim().toLowerCase())
+              );
+
+            return (
+              <TabsContent key={eco} value={eco} className="pb-8 mt-16 md:mt-32 ">
+                {filteredChallenges.length === 0 ? (
+                  <div className="flex flex-col items-center justify-center gap-2 py-12 text-center">
+                    <p className="text-lg font-medium">No challenges match your filters</p>
+                    <p className="text-sm text-[#BFBFBF]">
+                      Try clearing the search or selecting a different ecosystem tab.
+                    </p>
+                  </div>
+                ) : (
+                  <div className="flex flex-wrap gap-4 lg:w-[1240px] justify-center gap-y-4 w-full md:mx-auto ">
+                    {filteredChallenges.map((challenge, index) => (
+                      <ChallengeMainCard key={index} {...challenge} />
+                    ))}
+                  </div>
+                )}
+              </TabsContent>
+            );
+          })}
         </Tabs>
       </section>
     </>
