@@ -22,23 +22,27 @@ const Navbar = () => {
     address: metaMaskAddress,
     isConnected: isMetaMaskConnected,
     disconnectWallet: disconnectMetaMask,
+    error: metaMaskError,
   } = useMetaMaskConnection();
 
   const {
     address: trustAddress,
     isConnected: isTrustConnected,
     disconnectWallet: disconnectTrust,
+    error: trustError,
   } = useTrustWalletConnection();
 
   const {
     address: coinbaseAddress,
     isConnected: isCoinbaseConnected,
     disconnectWallet: disconnectCoinbase,
+    error: coinbaseError,
   } = useCoinbaseWalletConnection();
 
   const connectedAddress = metaMaskAddress || trustAddress || coinbaseAddress;
   const isConnected =
     isMetaMaskConnected || isTrustConnected || isCoinbaseConnected;
+  const connectionError = metaMaskError || trustError || coinbaseError;
 
   // Determine which wallet is connected
   const getConnectedWalletName = () => {
@@ -229,6 +233,13 @@ const Navbar = () => {
             <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#e3489f] transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
           </Link>
           <WalletButton />
+        </div>
+      )}
+
+      {/* Wallet Connection Error */}
+      {connectionError && !isConnected && (
+        <div className="fixed top-20 right-6 z-50 max-w-xs rounded-lg bg-red-500/10 border border-red-500/40 px-4 py-3 text-sm text-red-400 font-spaceGrotesk">
+          {connectionError}
         </div>
       )}
 
