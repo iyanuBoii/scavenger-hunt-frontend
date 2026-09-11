@@ -158,6 +158,16 @@ const Navbar = () => {
         </div>
       </div>
 
+      {/* Mobile Menu Button */}
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        aria-expanded={isOpen}
+        aria-label="Toggle navigation menu"
+        className="md:hidden text-[#d946ef] text-2xl bg-[#1a1a1a] p-2 rounded"
+      >
+        ☰
+      </button>
+
       {/* Mobile Menu */}
       {isOpen && (
         <div className="absolute left-0 flex flex-col z-50 items-center w-full p-6 space-y-4 bg-black top-16 bg-opacity-95 md:hidden">
@@ -175,57 +185,6 @@ const Navbar = () => {
           </Link>
           <Link href="/sign-in" className="text-lg text-white relative group overflow-hidden">
             <span className="relative z-10 transition-colors duration-300 group-hover:text-[#e3489f]">Sign In</span>
-            <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#e3489f] transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
-          </Link>
-          <WalletButton />
-        </div>
-      )}
-
-      {/* Mobile Menu Button */}
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="md:hidden text-[#d946ef] text-2xl bg-[#1a1a1a] p-2 rounded"
-      >
-        ☰
-      </button>
-
-      {/* Mobile Menu */}
-      {isOpen && (
-        <div className="absolute left-0 flex flex-col z-50 items-center w-full p-6 space-y-4 bg-black top-16 bg-opacity-95 md:hidden">
-          <Link
-            href="#"
-            className="text-lg text-white relative group overflow-hidden"
-          >
-            <span className="relative z-10 transition-colors duration-300 group-hover:text-[#e3489f]">
-              Home
-            </span>
-            <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#e3489f] transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
-          </Link>
-          <Link
-            href="#"
-            className="text-lg text-white relative group overflow-hidden"
-          >
-            <span className="relative z-10 transition-colors duration-300 group-hover:text-[#e3489f]">
-              About Us
-            </span>
-            <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#e3489f] transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
-          </Link>
-          <Link
-            href="#"
-            className="text-lg text-white relative group overflow-hidden"
-          >
-            <span className="relative z-10 transition-colors duration-300 group-hover:text-[#e3489f]">
-              Contact Us
-            </span>
-            <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#e3489f] transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
-          </Link>
-          <Link
-            href="/sign-in"
-            className="text-lg text-white relative group overflow-hidden"
-          >
-            <span className="relative z-10 transition-colors duration-300 group-hover:text-[#e3489f]">
-              Sign In
-            </span>
             <span className="absolute bottom-0 left-0 w-full h-[2px] bg-[#e3489f] transform origin-left scale-x-0 transition-transform duration-300 group-hover:scale-x-100"></span>
           </Link>
           <WalletButton />
