@@ -18,9 +18,10 @@ import { validatePassword } from "@/lib/validators";
 
 const Page = () => {
    const [error, setError] = useState(false);
+   const [loginError, setLoginError] = useState("");
    const [showForgotPassword, setShowForgotPassword] = useState(false);
    const [showEmailSent, setShowEmailSent] = useState(false);
-   const [email, setEmail] = useState(""); 
+   const [email, setEmail] = useState("");
 
    const formik = useFormik({
       initialValues: {
@@ -32,11 +33,17 @@ const Page = () => {
             return;
          } else {
             console.log(values);
+            setLoginError("Invalid email or password. Please try again.");
          }
       },
    });
 
    const { values, handleChange, handleSubmit } = formik;
+
+   const handleFieldChange = (e) => {
+      setLoginError("");
+      handleChange(e);
+   };
 
    useEffect(() => {
       if (values.Password) {
@@ -125,7 +132,7 @@ const Page = () => {
                         label={"Email"}
                         placeholder={"Johndoe@gmail.com"}
                         value={values.Email}
-                        onChange={handleChange}
+                        onChange={handleFieldChange}
                         required={true}
                      />
                      <Input
@@ -134,9 +141,14 @@ const Page = () => {
                         label={"Password"}
                         placeholder={"Enter your password"}
                         value={values.Password}
-                        onChange={handleChange}
+                        onChange={handleFieldChange}
                         required={true}
                      />
+                     {loginError && (
+                        <p className="text-[#F93232] space-grotesk font-[500] text-[14px]">
+                           {loginError}
+                        </p>
+                     )}
                      <div className="flex justify-between items-center">
                         <p className="text-[#F93232] space-grotesk font-[500] text-[14px]">
                            {error ? "Must be at least 8 characters" : ""}
