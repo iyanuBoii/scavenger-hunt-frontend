@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { QRCodeSVG } from "qrcode.react";
-import { Copy, LogOut } from "lucide-react";
+import { Check, Copy, LogOut } from "lucide-react";
 import { WalletIcon } from "./WalletIcon";
 
 export const WalletAddressPopup = ({ address, onDisconnect, onClose, walletName }) => {
@@ -46,9 +46,14 @@ export const WalletAddressPopup = ({ address, onDisconnect, onClose, walletName 
               </div>
               <button
                 onClick={copyAddress}
+                aria-label="Copy wallet address"
                 className="p-3 bg-[#1A1A2F] rounded-lg text-gray-400 hover:text-white transition-colors"
               >
-                <Copy className="w-5 h-5" />
+                {copied ? (
+                  <Check className="w-5 h-5 text-green-500" />
+                ) : (
+                  <Copy className="w-5 h-5" />
+                )}
               </button>
             </div>
 
