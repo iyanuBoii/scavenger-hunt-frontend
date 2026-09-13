@@ -8,8 +8,13 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { dummyChallenges } from "@/lib/mockdata";
 
 const ecosystems = ["All", ...new Set(dummyChallenges.map((c) => c.ecosystem))];
+const difficulties = [
+  "All",
+  ...new Set(dummyChallenges.map((c) => c.level.toLowerCase())),
+];
 function page() {
   const [search, setSearch] = useState("");
+  const [difficulty, setDifficulty] = useState("All");
 
   return (
     <>
@@ -25,7 +30,7 @@ function page() {
         </div>
       </section>
       <section className="relative flex flex-col items-center w-full px-6 pt-12 text-white md:pt-24 md:px-12 Orbitron ">
-        <div className="w-full max-w-[500px] mb-8">
+        <div className="w-full max-w-[500px] mb-8 flex flex-col sm:flex-row gap-3">
           <input
             type="text"
             value={search}
@@ -34,6 +39,18 @@ function page() {
             aria-label="Search challenges by name"
             className="w-full h-[48px] rounded-[10px] bg-[#FD7DFF1A] border border-[#FD7DFF33] px-4 text-sm text-white placeholder:text-[#BFBFBF] focus:outline-none focus:border-[#E7499F]"
           />
+          <select
+            value={difficulty}
+            onChange={(e) => setDifficulty(e.target.value)}
+            aria-label="Filter challenges by difficulty"
+            className="w-full sm:w-[180px] h-[48px] rounded-[10px] bg-[#FD7DFF1A] border border-[#FD7DFF33] px-4 text-sm text-white focus:outline-none focus:border-[#E7499F]"
+          >
+            {difficulties.map((level) => (
+              <option key={level} value={level} className="text-black">
+                {level === "All" ? "All difficulties" : level}
+              </option>
+            ))}
+          </select>
         </div>
         <Tabs className="w-full " defaultValue="All">
           <div className="flex items-center justify-center w-fit mx-auto rounded-[10px] bg-[#FD7DFF1A] md:mb-60 mb-12">
@@ -57,6 +74,11 @@ function page() {
           {ecosystems.map((eco) => {
             const filteredChallenges = dummyChallenges
               .filter((challenge) => eco === "All" || challenge.ecosystem === eco)
+              .filter(
+                (challenge) =>
+                  difficulty === "All" ||
+                  challenge.level.toLowerCase() === difficulty
+              )
               .filter((challenge) =>
                 challenge.title.toLowerCase().includes(search.trim().toLowerCase())
               );
