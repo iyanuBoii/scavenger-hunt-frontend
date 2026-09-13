@@ -11,10 +11,26 @@
     * - Modification    : 
 **/
 "use client"
+import { useMemo, useState } from "react";
 import Link from "next/link";
 import EcosystemCard from "./EcosystemCard";
 
 const EcosystemSection = ({ ecosystems = [] }) => {
+  const [search, setSearch] = useState("");
+  const [sortOrder, setSortOrder] = useState("az");
+
+  const visibleEcosystems = useMemo(() => {
+    return ecosystems
+      .filter((ecosystem) =>
+        ecosystem.title.toLowerCase().includes(search.trim().toLowerCase())
+      )
+      .sort((a, b) =>
+        sortOrder === "az"
+          ? a.title.localeCompare(b.title)
+          : b.title.localeCompare(a.title)
+      );
+  }, [ecosystems, search, sortOrder]);
+
   return (
     <div className="w-full mx-auto px-4 sm:px-6 pt-12 pb-16">
       <div className="flex items-center justify-between mb-6">
@@ -27,6 +43,28 @@ const EcosystemSection = ({ ecosystems = [] }) => {
           </button>
         )}
       </div>
+
+      {ecosystems.length > 0 && (
+        <div className="flex flex-col sm:flex-row gap-3 mb-6">
+          <input
+            type="text"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Search your ecosystems..."
+            aria-label="Search your ecosystems"
+            className="w-full sm:max-w-xs h-11 rounded-lg bg-white/5 border border-white/10 px-4 text-sm text-white placeholder:text-gray-500 focus:outline-none focus:border-white/30"
+          />
+          <select
+            value={sortOrder}
+            onChange={(e) => setSortOrder(e.target.value)}
+            aria-label="Sort your ecosystems"
+            className="w-full sm:w-[160px] h-11 rounded-lg bg-white/5 border border-white/10 px-4 text-sm text-white focus:outline-none focus:border-white/30"
+          >
+            <option value="az" className="text-black">Name (A-Z)</option>
+            <option value="za" className="text-black">Name (Z-A)</option>
+          </select>
+        </div>
+      )}
 
       {ecosystems.length === 0 ? (
         <div className="flex flex-col items-center justify-center gap-3 rounded-xl border border-dashed border-white/20 py-12 text-center">
@@ -41,9 +79,13 @@ const EcosystemSection = ({ ecosystems = [] }) => {
             Explore Ecosystems
           </Link>
         </div>
+      ) : visibleEcosystems.length === 0 ? (
+        <p className="text-sm text-gray-400 text-center py-8">
+          No ecosystems match your search.
+        </p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          {ecosystems.map((ecosystem, index) => (
+          {visibleEcosystems.map((ecosystem, index) => (
             <EcosystemCard key={index} {...ecosystem} />
           ))}
         </div>
