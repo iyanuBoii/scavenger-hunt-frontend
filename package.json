@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "jest"
   },
   "dependencies": {
     "@auth0/auth0-react": "^2.3.0",
@@ -38,6 +39,7 @@
   "devDependencies": {
     "eslint": "^8",
     "eslint-config-next": "14.2.24",
+    "jest": "^29.7.0",
     "postcss": "^8.5.3",
     "tailwindcss": "^3.4.17"
   }

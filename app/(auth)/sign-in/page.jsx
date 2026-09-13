@@ -14,6 +14,7 @@ import Link from "next/link";
 import mobilebackground from "@/public/images/mobilebackground.svg";
 import ForgotPasswordPopup from "@/components/ui/ForgotPasswordPopup";
 import EmailSentPopup from "@/components/ui/EmailSentPopup";
+import { validatePassword } from "@/lib/validators";
 
 const Page = () => {
    const [error, setError] = useState(false);
@@ -39,7 +40,7 @@ const Page = () => {
 
    useEffect(() => {
       if (values.Password) {
-         values.Password.length < 8 ? setError(true) : setError(false);
+         setError(Boolean(validatePassword(values.Password)));
       }
    }, [values.Password]);
 
