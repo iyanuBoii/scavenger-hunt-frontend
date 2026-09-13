@@ -1,10 +1,12 @@
 "use client";
 import { useEffect, useRef } from "react";
+import { useRouter } from "next/navigation";
 import lottie from "lottie-web";
 import Link from "next/link";
 
 export default function NotFound() {
   const container = useRef(null);
+  const router = useRouter();
 
   useEffect(() => {
     if (container.current) {
@@ -32,12 +34,23 @@ export default function NotFound() {
         The page you are looking for doesn&apos;t exist or has been moved.
       </p>
 
-      <Link
-        href="/"
-        className="mt-8 px-8 py-3 bg-gradient-to-r from-[#7D3EAF] to-[#E7499F] text-white rounded-lg font-orbitron hover:opacity-90 transition-opacity"
-      >
-        Back to Home
-      </Link>
+      <div className="mt-8 flex flex-col sm:flex-row items-center gap-4">
+        <Link
+          href="/"
+          aria-label="Go back to the home page"
+          className="px-8 py-3 bg-gradient-to-r from-[#7D3EAF] to-[#E7499F] text-white rounded-lg font-orbitron hover:opacity-90 transition-opacity"
+        >
+          Back to Home
+        </Link>
+        <button
+          type="button"
+          onClick={() => router.back()}
+          aria-label="Go back to the previous page"
+          className="px-8 py-3 border border-[#3B82F64D] text-white rounded-lg font-orbitron hover:bg-white/5 transition-colors"
+        >
+          Go Back
+        </button>
+      </div>
     </div>
   );
 }
