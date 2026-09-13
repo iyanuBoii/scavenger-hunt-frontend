@@ -20,9 +20,11 @@ import TextWithIcon from "@/components/ui/TextWithIcon";
 import LeaderBoard from "@/components/Leaderboard";
 import StateDifficulty from "@/components/StateDifficulty";
 import Footer from "@/components/homepage/Footer";
+import ConfirmJoinChallengeDialog from "@/components/ui/ConfirmJoinChallengeDialog";
 
 function Page({ params }) {
   const [challenge, setChallenge] = useState(null);
+  const [showConfirmJoin, setShowConfirmJoin] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -110,6 +112,7 @@ function Page({ params }) {
 
             <Button
               variant="gradient"
+              onClick={() => setShowConfirmJoin(true)}
               className="px-10 py-1 text-lg font-medium w-fit h-fit font-orbitron text-texts-important"
             >
               Join Now
@@ -183,6 +186,16 @@ function Page({ params }) {
       </section>
 
       <Footer />
+
+      <ConfirmJoinChallengeDialog
+        challengeTitle={challenge.title}
+        isOpen={showConfirmJoin}
+        onCancel={() => setShowConfirmJoin(false)}
+        onConfirm={() => {
+          setShowConfirmJoin(false);
+          console.log(`Joined challenge: ${challenge.title}`);
+        }}
+      />
     </div>
   );
 }
